@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('sidang', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('penguji_id');
+            $table->unsignedBigInteger('mahasiswa_id');
+            $table->date('jadwal_bimbingan');
+            $table->foreign('penguji_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('mahasiswa_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
