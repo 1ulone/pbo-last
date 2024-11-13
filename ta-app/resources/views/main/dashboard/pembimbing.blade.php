@@ -38,7 +38,7 @@
         }
 
         table thead {
-            background-color: #4CAF50;
+            background-color: #007BFF; /* Warna biru */
             color: white;
         }
 
@@ -55,7 +55,7 @@
         /* Tombol aksi */
         a, button {
             padding: 8px 12px;
-            background-color: #4CAF50;
+            background-color: #007BFF; /* Warna biru */
             color: white;
             text-decoration: none;
             border: none;
@@ -64,7 +64,7 @@
         }
 
         a:hover, button:hover {
-            background-color: #45a049;
+            background-color: #0056b3; /* Biru lebih gelap saat hover */
         }
 
         /* Style untuk log bimbingan dan riwayat mahasiswa */
