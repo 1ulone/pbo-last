@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Glassmorphism Login Form</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
 
@@ -27,13 +28,19 @@
     }
 
     .wrapper {
-      width: 400px;
-      border-radius: 8px;
-      padding: 30px;
+      width: 525px;
+      border-radius: 20px;
+      padding: 60px;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+    }
+
+    .wrapper img {
+      width: 70px;
+      height: 80px;
+      margin-bottom: 10px;
     }
 
     form {
@@ -56,7 +63,7 @@
     .input-field label {
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 35px;
       transform: translateY(-50%);
       color: #fff;
       font-size: 16px;
@@ -72,6 +79,7 @@
       outline: none;
       font-size: 16px;
       color: #fff;
+      padding-left: 35px;
     }
 
     .input-field input:focus~label,
@@ -79,6 +87,15 @@
       font-size: 0.8rem;
       top: 10px;
       transform: translateY(-120%);
+    }
+
+    .input-field i {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ccc;
+      font-size: 20px;
     }
 
     .forget {
@@ -118,7 +135,7 @@
       border: none;
       padding: 12px 20px;
       cursor: pointer;
-      border-radius: 3px;
+      border-radius: 20px;
       font-size: 16px;
       border: 2px solid transparent;
       transition: 0.3s ease;
@@ -139,26 +156,29 @@
 </head>
 <body>
   <div class="wrapper">
+    <img src="polman.png" alt="User Photo">
     <form action="#">
       <h2>Login</h2>
       <div class="input-field">
+        <i class="bx bxs-user"></i>
         <input type="text" required>
-        <label>Enter your email</label>
+        <label>Email</label>
       </div>
       <div class="input-field">
+        <i class="bx bxs-lock-alt"></i>
         <input type="password" required>
-        <label>Enter your password</label>
+        <label>Password</label>
       </div>
       <div class="forget">
         <label for="remember">
           <input type="checkbox" id="remember">
-          <p>Remember me</p>
+          <p>Ingatkan Saya</p>
         </label>
-        <a href="#">Forgot password?</a>
+        <a href="#">Lupa Password?</a>
       </div>
       <button type="submit">Log In</button>
       <div class="register">
-        <p>Don't have an account? <a href="#">Register</a></p>
+        <p><a href="https://polman-bandung.ac.id/" target="_blank">polmanbandung.ac.id</a></p>
       </div>
     </form>
   </div>
