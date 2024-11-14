@@ -20,6 +20,45 @@
             }
             document.getElementById(tabId).classList.add("active");
         }
+
+        function addLecturerRole() {
+            var lecturerName = document.getElementById("lecturerName").value;
+            var role = document.getElementById("role").value;
+
+            var table = document.getElementById("lecturersTable");
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = lecturerName;
+            cell2.innerHTML = role;
+            cell3.innerHTML = '<a href="#">Hapus</a>';
+
+            document.getElementById("lecturerName").value = "";
+            document.getElementById("role").value = "Dosen Pembimbing";
+        }
+
+        function addSchedule() {
+            var activityType = document.getElementById("activityType").value;
+            var date = document.getElementById("date").value;
+
+            var table = document.getElementById("schedulesTable");
+            var newRow = table.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+
+            cell1.innerHTML = table.rows.length; // ID
+            cell2.innerHTML = activityType;
+            cell3.innerHTML = date;
+            cell4.innerHTML = '<a href="#">Lihat Detail</a>';
+
+            document.getElementById("activityType").value = "Seminar Proposal";
+            document.getElementById("date").value = "";
+        }
+
     </script>
 </head>
 <body>
@@ -31,6 +70,7 @@
         <button onclick="showTab('tabSchedules')">Jadwal Seminar & Sidang</button>
         <button onclick="showTab('tabProgress')">Progres Mahasiswa</button>
         <button onclick="showTab('tabNews')">Berita & Pengumuman</button>
+        <button onclick="showTab('tabLecturerRoles')">Penetapan Role Dosen</button>
     </div>
 
     <!-- Tab 1: Pengelolaan Proposal -->
@@ -61,7 +101,25 @@
     <!-- Tab 2: Penjadwalan Seminar dan Sidang -->
     <div id="tabSchedules" class="tab">
         <h3>Jadwal Seminar dan Sidang Tugas Akhir</h3>
-        <table>
+        
+        <!-- Form to Add Schedule -->
+        <h4>Tambah Jadwal Seminar/Sidang</h4>
+        <form onsubmit="event.preventDefault(); addSchedule();">
+            <label for="activityType">Jenis Kegiatan:</label>
+            <select id="activityType" required>
+                <option value="Seminar Proposal">Seminar Proposal</option>
+                <option value="Sidang Tugas Akhir">Sidang Tugas Akhir</option>
+            </select><br><br>
+            
+            <label for="date">Tanggal:</label>
+            <input type="date" id="date" required><br><br>
+            
+            <button type="submit">Tambah Jadwal</button>
+        </form>
+        
+        <!-- Table to Display Schedule -->
+        <h4>Daftar Jadwal Seminar dan Sidang</h4>
+        <table id="schedulesTable">
             <tr>
                 <th>ID</th>
                 <th>Jenis Kegiatan</th>
@@ -105,15 +163,6 @@
                 <td>Belum</td>
                 <td><a href="#">Detail</a></td>
             </tr>
-            <tr>
-                <td>102</td>
-                <td>Rina Sari</td>
-                <td>Optimasi Database</td>
-                <td>Dalam Proses</td>
-                <td>Sudah</td>
-                <td>Belum</td>
-                <td><a href="#">Detail</a></td>
-            </tr>
         </table>
     </div>
 
@@ -126,12 +175,31 @@
                 Seminar Proposal untuk mahasiswa Tugas Akhir akan dilaksanakan pada 2024-11-15.<br>
                 <a href="#">Baca selengkapnya</a>
             </li>
-            <li>
-                <strong>Ujian Sidang Tugas Akhir</strong> - 2024-11-08<br>
-                Ujian Sidang untuk mahasiswa yang telah selesai bimbingan akan dimulai pada 2024-11-20.<br>
-                <a href="#">Baca selengkapnya</a>
-            </li>
         </ul>
+    </div>
+
+    <!-- Tab 5: Penetapan Role Dosen Pembimbing dan Penguji -->
+    <div id="tabLecturerRoles" class="tab">
+        <h3>Penetapan Role Dosen Pembimbing dan Penguji</h3>
+        <form onsubmit="event.preventDefault(); addLecturerRole();">
+            <label for="lecturerName">Nama Dosen:</label>
+            <input type="text" id="lecturerName" required><br><br>
+            
+            <label for="role">Peran:</label>
+            <select id="role" required>
+                <option value="Dosen Pembimbing">Dosen Pembimbing</option>
+                <option value="Dosen Penguji">Dosen Penguji</option>
+            </select><br><br>
+            
+            <button type="submit">Tambah Dosen</button>
+        </form>
+        <table id="lecturersTable">
+            <tr>
+                <th>Nama Dosen</th>
+                <th>Peran</th>
+                <th>Aksi</th>
+            </tr>
+        </table>
     </div>
 
 </body>
