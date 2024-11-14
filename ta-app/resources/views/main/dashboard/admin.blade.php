@@ -5,12 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Koordinator Tugas Akhir</title>
     <style>
-        .tab { display: none; }
-        .tab.active { display: block; }
-        .tab-buttons button { margin: 5px; }
-        table { width: 100%; border-collapse: collapse; }
-        table, th, td { border: 1px solid black; }
-        th, td { padding: 8px; text-align: left; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1A237E; /* Biru Tua */
+            margin-top: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .tab-buttons button {
+            background-color: #1A237E; /* Biru Tua */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-buttons button:hover {
+            background-color: #0D1A6A; /* Biru Lebih Gelap */
+        }
+
+        .tab {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1A237E; /* Biru Tua */
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        td a {
+            color: #1A237E; /* Biru Tua */
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #1A237E; /* Biru Tua */
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0D1A6A; /* Biru Lebih Gelap */
+        }
     </style>
     <script>
         function showTab(tabId) {
@@ -58,7 +163,6 @@
             document.getElementById("activityType").value = "Seminar Proposal";
             document.getElementById("date").value = "";
         }
-
     </script>
 </head>
 <body>
@@ -161,43 +265,57 @@
                 <td>Selesai</td>
                 <td>Belum</td>
                 <td>Belum</td>
-                <td><a href="#">Detail</a></td>
+                <td><a href="#">Lihat Detail</a></td>
             </tr>
         </table>
     </div>
 
-    <!-- Tab 4: Pengelolaan Berita dan Pengumuman -->
+    <!-- Tab 4: Pengelolaan Berita & Pengumuman -->
     <div id="tabNews" class="tab">
-        <h3>Berita dan Pengumuman</h3>
-        <ul>
-            <li>
-                <strong>Pengumuman Jadwal Seminar</strong> - 2024-11-10<br>
-                Seminar Proposal untuk mahasiswa Tugas Akhir akan dilaksanakan pada 2024-11-15.<br>
-                <a href="#">Baca selengkapnya</a>
-            </li>
-        </ul>
+        <h3>Berita & Pengumuman Jurusan</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Judul Berita</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Pendaftaran Seminar Tugas Akhir</td>
+                <td>2024-11-10</td>
+                <td><a href="#">Lihat</a></td>
+            </tr>
+        </table>
     </div>
 
-    <!-- Tab 5: Penetapan Role Dosen Pembimbing dan Penguji -->
+    <!-- Tab 5: Penetapan Role Dosen -->
     <div id="tabLecturerRoles" class="tab">
-        <h3>Penetapan Role Dosen Pembimbing dan Penguji</h3>
+        <h3>Penetapan Role Dosen</h3>
         <form onsubmit="event.preventDefault(); addLecturerRole();">
             <label for="lecturerName">Nama Dosen:</label>
             <input type="text" id="lecturerName" required><br><br>
             
-            <label for="role">Peran:</label>
-            <select id="role" required>
+            <label for="role">Role:</label>
+            <select id="role">
                 <option value="Dosen Pembimbing">Dosen Pembimbing</option>
                 <option value="Dosen Penguji">Dosen Penguji</option>
             </select><br><br>
             
             <button type="submit">Tambah Dosen</button>
         </form>
+        
+        <h4>Daftar Dosen Tugas Akhir</h4>
         <table id="lecturersTable">
             <tr>
                 <th>Nama Dosen</th>
-                <th>Peran</th>
+                <th>Role</th>
                 <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>Dr. Budi</td>
+                <td>Dosen Pembimbing</td>
+                <td><a href="#">Hapus</a></td>
             </tr>
         </table>
     </div>
