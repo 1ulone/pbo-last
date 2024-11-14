@@ -147,6 +147,7 @@
         function addSchedule() {
             var activityType = document.getElementById("activityType").value;
             var date = document.getElementById("date").value;
+            var studentName = document.getElementById("studentName").value;
 
             var table = document.getElementById("schedulesTable");
             var newRow = table.insertRow();
@@ -154,14 +155,17 @@
             var cell2 = newRow.insertCell(1);
             var cell3 = newRow.insertCell(2);
             var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
 
             cell1.innerHTML = table.rows.length; // ID
             cell2.innerHTML = activityType;
             cell3.innerHTML = date;
-            cell4.innerHTML = '<a href="#">Lihat Detail</a>';
+            cell4.innerHTML = studentName;
+            cell5.innerHTML = '<a href="#">Lihat Detail</a>';
 
             document.getElementById("activityType").value = "Seminar Proposal";
             document.getElementById("date").value = "";
+            document.getElementById("studentName").value = "";
         }
     </script>
 </head>
@@ -217,6 +221,9 @@
             
             <label for="date">Tanggal:</label>
             <input type="date" id="date" required><br><br>
+
+            <label for="studentName">Nama Mahasiswa:</label>
+            <input type="text" id="studentName" required><br><br>
             
             <button type="submit">Tambah Jadwal</button>
         </form>
@@ -228,18 +235,21 @@
                 <th>ID</th>
                 <th>Jenis Kegiatan</th>
                 <th>Tanggal</th>
+                <th>Nama Mahasiswa</th>
                 <th>Aksi</th>
             </tr>
             <tr>
                 <td>1</td>
                 <td>Seminar Proposal</td>
                 <td>2024-11-15</td>
+                <td>Andi Setiawan</td>
                 <td><a href="#">Lihat Detail</a></td>
             </tr>
             <tr>
                 <td>2</td>
                 <td>Sidang Tugas Akhir</td>
                 <td>2024-11-20</td>
+                <td>Rina Susanti</td>
                 <td><a href="#">Lihat Detail</a></td>
             </tr>
         </table>
@@ -252,39 +262,34 @@
             <tr>
                 <th>ID Mahasiswa</th>
                 <th>Nama Mahasiswa</th>
-                <th>Judul Tugas Akhir</th>
-                <th>Status Bimbingan</th>
-                <th>Status Seminar</th>
-                <th>Status Sidang</th>
-                <th>Aksi</th>
+                <th>Progres</th>
             </tr>
             <tr>
-                <td>101</td>
-                <td>Asep Sudrajat</td>
-                <td>Pengembangan Aplikasi Mobile</td>
-                <td>Selesai</td>
-                <td>Belum</td>
-                <td>Belum</td>
-                <td><a href="#">Lihat Detail</a></td>
+                <td>1</td>
+                <td>Andi Setiawan</td>
+                <td>75%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Rina Susanti</td>
+                <td>50%</td>
             </tr>
         </table>
     </div>
 
-    <!-- Tab 4: Pengelolaan Berita & Pengumuman -->
+    <!-- Tab 4: Berita dan Pengumuman -->
     <div id="tabNews" class="tab">
-        <h3>Berita & Pengumuman Jurusan</h3>
+        <h3>Berita & Pengumuman</h3>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Judul Berita</th>
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
             <tr>
-                <td>1</td>
-                <td>Pendaftaran Seminar Tugas Akhir</td>
+                <td>Pengumuman Sidang Tugas Akhir</td>
                 <td>2024-11-10</td>
-                <td><a href="#">Lihat</a></td>
+                <td><a href="#">Baca Selengkapnya</a></td>
             </tr>
         </table>
     </div>
@@ -292,20 +297,22 @@
     <!-- Tab 5: Penetapan Role Dosen -->
     <div id="tabLecturerRoles" class="tab">
         <h3>Penetapan Role Dosen</h3>
+        
+        <h4>Tambah Dosen</h4>
         <form onsubmit="event.preventDefault(); addLecturerRole();">
             <label for="lecturerName">Nama Dosen:</label>
             <input type="text" id="lecturerName" required><br><br>
             
-            <label for="role">Role:</label>
-            <select id="role">
+            <label for="role">Role Dosen:</label>
+            <select id="role" required>
                 <option value="Dosen Pembimbing">Dosen Pembimbing</option>
                 <option value="Dosen Penguji">Dosen Penguji</option>
             </select><br><br>
             
             <button type="submit">Tambah Dosen</button>
         </form>
-        
-        <h4>Daftar Dosen Tugas Akhir</h4>
+
+        <h4>Daftar Dosen</h4>
         <table id="lecturersTable">
             <tr>
                 <th>Nama Dosen</th>
@@ -313,7 +320,7 @@
                 <th>Aksi</th>
             </tr>
             <tr>
-                <td>Dr. Budi</td>
+                <td>Dr. Taufik</td>
                 <td>Dosen Pembimbing</td>
                 <td><a href="#">Hapus</a></td>
             </tr>
