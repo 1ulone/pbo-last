@@ -2,60 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
     public function index()
-    {
-        //
-    }
+        {
+            $mahasiswa = User::all();
+            return view('mahasiswa.index', compact('mahasiswa'));
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        public function create(Request $request)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users',
+                'roles' => 'required|string|max:255',
+                'jurusan' => 'required|string|max:255',
+                'password' => 'required|string|min:8',
+            ]);
+            return view('mahasiswa.create');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        public function store(Request $request)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users',
+                'roles' => 'required|string|max:255',
+                'jurusan' => 'required|string|max:255',
+                'password' => 'required|string|min:8',
+            ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            $data = $request->all();
+            $data['password'] = bcrypt($request->password);
+            User::create($data);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+            return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan!');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        public function show(User $mahasiswa)
+        {
+            return view('mahasiswa.show', compact('mahasiswa'));
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+        public function edit(User $mahasiswa)
+        {
+            return view('mahasiswa.edit', compact('mahasiswa'));
+        }
+
+        public function update(Request $request, User $mahasiswa)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email,' . $mahasiswa->id,
+                'roles' => 'required|string|max:255',
+                'jurusan' => 'required|string|max:255', // Validasi untuk jurusan
+            ]);
+
+            $mahasiswa->update($request->all());
+
+            return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diperbarui!');
+        }
+
+        public function destroy(User $mahasiswa)
+        {
+            $mahasiswa->delete();
+
+            return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus!');
+        }
 }
+

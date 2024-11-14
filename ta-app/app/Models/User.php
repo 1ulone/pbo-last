@@ -2,32 +2,32 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+//combsd
 class User extends Model
 {
-    private $id;
-    private $username;
-    private $password; // This is now stored in plain text, which is not recommended
-    private $role;
+    protected $table = 'users';
+    protected $fillable = [
+        'name',
+        'email',
+        'roles',
+        'jurusan',
+        'password'
+    ];
 
-    public function __construct($id, $username, $role) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->role = $role;
+    public function bimbingan()
+    {
+        return $this->hasMany(Bimbingan::class);
     }
 
-    public function getRole() {
-        return $this->role;
+    public function seminar()
+    {
+        return $this->hasOne(Seminar::class);
     }
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getUsername() {
-        return $this->username;
+    public function sidang()
+    {
+        return $this->hasOne(Sidang::class);
     }
 }
