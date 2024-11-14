@@ -9,12 +9,10 @@ class Auth extends Model
 {
     public function authenticate($email, $password)
     {
-        $user = $this->where('email', $email)->first();
-
+        $user = DB::table('users')->where('email', $email)->first();
         if ($user && $password == $user->password) {
             return $user;
         }
-
         return null;
     }
 }
