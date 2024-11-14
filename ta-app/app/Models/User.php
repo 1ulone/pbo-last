@@ -2,27 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    private $id;
+    private $username;
+    private $password; // This is now stored in plain text, which is not recommended
+    private $role;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'roles',
-        'jurusan',
-        'password',
-    ];
+    public function __construct($id, $username, $role) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->role = $role;
+    }
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function getRole() {
+        return $this->role;
+    }
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
 }
