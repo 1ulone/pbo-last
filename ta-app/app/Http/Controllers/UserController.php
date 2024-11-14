@@ -6,7 +6,8 @@ use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller {
+class UserController extends Controller 
+{
     public function index()
         {
             $mahasiswa = User::all();
@@ -73,3 +74,4 @@ class UserController extends Controller {
             return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus!');
         }
 }
+
