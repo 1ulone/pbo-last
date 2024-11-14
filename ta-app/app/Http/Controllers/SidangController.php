@@ -7,59 +7,72 @@ use Illuminate\Http\Request;
 
 class SidangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    //Function to fetch all records
+    public function readAll()
     {
-        //
+        $sisang = Sidang::all();
+        return view('contoh', compact('contoh'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // Fungsi untuk menampilkan kolom jadwal_bimbingan berdasarkan id
+    public function readOne($id)
     {
-        //
+        // Mengambil hanya kolom jadwal_bimbingan berdasarkan id
+        $sidang = Sidang::select('jadwal_bimbingan')
+                    ->where('id', $id)
+                    ->first();
+
+        // Memeriksa apakah data ditemukan
+        if ($sidang) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data found',
+                'jadwal_bimbingan' => $sidang->jadwal_bimbingan,
+            ], 200);
+        }
+
+        // Mengembalikan response jika data tidak ditemukan
+        return response()->json([
+            'success' => false,
+            'message' => 'Data not found'
+        ], 404);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // 3. Function to create a new record (only `jadwal_bimbingan`)
+    public function create(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'penguji_id' => 'required|integer',
+            'mahasiswa_id' => 'required|integer',
+            'jadwal_bimbingan' => 'required|date',
+        ]);
+
+        // Membuat data seminar baru
+        $sidang = Sidang::create([
+            'penguji_id' => $request->penguji_id,
+            'mahasiswa_id' => $request->mahasiswa_id,
+            'jadwal_bimbingan' => $request->jadwal_bimbingan,
+        ]);
+
+        // Mengembalikan response
+        if ($sidang) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Sidang created successfully',
+                'data' => $sidang
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to create sidang'
+        ], 500);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Sidang $sidang)
-    {
-        //
-    }
+    public function contoh()
+{
+    return view('contoh');
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sidang $sidang)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sidang $sidang)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sidang $sidang)
-    {
-        //
-    }
 }

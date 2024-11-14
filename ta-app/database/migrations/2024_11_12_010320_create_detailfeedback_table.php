@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('detailfeedback', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('mahasiswa_id');
+            $table->unsignedBigInteger('bimbingan_id')->unique();
+            $table->unsignedBigInteger('seminar_id')->unique();
+            $table->unsignedBigInteger('sidang_id')->unique()->unsigned;
+            $table->string('detail');
+
+            $table->foreign('mahasiswa_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('bimbingan_id')->references('id')->on('bimbingan')->cascadeOnDelete();
+            $table->foreign('seminar_id')->references('id')->on('seminar')->cascadeOnDelete();
+            $table->foreign('sidang_id')->references('id')->on('sidang')->cascadeOnDelete();
         });
     }
 
